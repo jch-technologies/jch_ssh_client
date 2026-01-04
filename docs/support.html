@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - JCH SSH Client</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0d1117;
+            --bg-card: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-yellow: #d29922;
+            --accent-red: #f85149;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.7;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #39c5cf, var(--accent));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: monospace;
+            font-size: 1.2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 24px;
+        }
+        
+        .nav-links a:hover {
+            color: var(--text);
+        }
+        
+        main {
+            padding: 60px 0;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 48px;
+        }
+        
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+        
+        .support-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+        
+        .support-card:hover {
+            border-color: var(--accent);
+        }
+        
+        .support-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .support-card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+        
+        .support-card p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            background: #79b8ff;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(88, 166, 255, 0.1);
+        }
+        
+        /* FAQ Section */
+        .faq {
+            margin-top: 60px;
+        }
+        
+        .faq h2 {
+            font-size: 1.8rem;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px 24px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        
+        .faq-answer {
+            padding: 0 24px 20px;
+            color: var(--text-secondary);
+            display: none;
+        }
+        
+        .faq-item.open .faq-answer {
+            display: block;
+        }
+        
+        .faq-item.open .faq-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .faq-arrow {
+            transition: transform 0.2s;
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-dark);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        /* Contact */
+        .contact {
+            margin-top: 60px;
+            text-align: center;
+            padding: 48px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        
+        .contact h2 {
+            margin-bottom: 16px;
+        }
+        
+        .contact p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">>_</div>
+                    JCH SSH Client
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Start</a>
+                    <a href="privacy.html">Datenschutz</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <h1>Support</h1>
+            <p class="subtitle">Hilfe bekommen, Fehler melden, Feature-Wünsche äußern</p>
+            
+            <div class="support-grid">
+                <div class="support-card">
+                    <div class="support-icon">🐛</div>
+                    <h2>Bug melden</h2>
+                    <p>Hast du einen Fehler gefunden? Erstelle ein Issue auf GitHub mit einer genauen Beschreibung.</p>
+                    <a href="https://github.com/jch-technologies/jch_ssh_client/issues/new?template=bug_report.md" class="btn btn-primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        Bug Report erstellen
+                    </a>
+                </div>
+                
+                <div class="support-card">
+                    <div class="support-icon">💡</div>
+                    <h2>Feature-Wunsch</h2>
+                    <p>Dir fehlt eine Funktion? Schlage sie als Feature Request auf GitHub vor.</p>
+                    <a href="https://github.com/jch-technologies/jch_ssh_client/issues/new?template=feature_request.md" class="btn btn-primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        Feature vorschlagen
+                    </a>
+                </div>
+                
+                <div class="support-card">
+                    <div class="support-icon">📖</div>
+                    <h2>Alle Issues</h2>
+                    <p>Durchsuche bestehende Issues oder schau, woran gerade gearbeitet wird.</p>
+                    <a href="https://github.com/jch-technologies/jch_ssh_client/issues" class="btn btn-secondary">
+                        Issues durchsuchen
+                    </a>
+                </div>
+            </div>
+            
+            <section class="faq">
+                <h2>Häufig gestellte Fragen</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Warum fragt die App nach meinem Passwort?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>SSH benötigt Authentifizierung um sich mit Servern zu verbinden. Du kannst ein Passwort, SSH-Keys oder beides verwenden. Passwörter werden nur lokal gespeichert und niemals übertragen.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Unterstützt die App SSH-Keys mit Passphrase?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Ja! Gib deine Passphrase im Passwort-Feld ein. Die App erkennt automatisch, ob ein Passwort oder eine Passphrase benötigt wird.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Wie lösche ich meine gespeicherten Verbindungen?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Klicke auf das Verbindungsprofil und wähle "Löschen". Für Keychain-Einträge öffne die macOS Schlüsselbundverwaltung.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Funktioniert die App mit Windows-Servern?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Ja, solange der Windows-Server OpenSSH aktiviert hat (ab Windows 10 verfügbar). Die Terminal-Farbunterstützung ist dann eingeschränkt.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Warum funktionieren nano/vim nicht richtig?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>TUI-Programme wie nano und vim benötigen volle Terminal-Emulation. Die App nutzt SwiftTerm, das diese vollständig unterstützt. Falls Probleme auftreten, überprüfe die TERM-Einstellung auf dem Server (<code>echo $TERM</code> sollte <code>xterm-256color</code> zeigen).</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Werden meine Daten in die Cloud übertragen?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Nein.</strong> Alle Daten werden ausschließlich lokal auf deinem Mac gespeichert. Die App hat keine Verbindung zu Cloud-Diensten, Analytics oder Tracking. Mehr dazu in unserer <a href="privacy.html">Datenschutzerklärung</a>.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="contact">
+                <h2>Noch Fragen?</h2>
+                <p>Falls deine Frage nicht beantwortet wurde, kontaktiere uns direkt.</p>
+                <a href="mailto:mail@jch-technologies.de" class="btn btn-primary">
+                    ✉️ E-Mail schreiben
+                </a>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>© 2025 Joachim Christof Huben. Alle Rechte vorbehalten.</p>
+            <p style="margin-top: 8px;"><a href="index.html">Startseite</a> · <a href="privacy.html">Datenschutz</a></p>
+        </div>
+    </footer>
+</body>
+</html>
+
