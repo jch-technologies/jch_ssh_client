@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JCH SSH Client - Professioneller SSH-Client für macOS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0d1117;
+            --bg-card: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-cyan: #39c5cf;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--text);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--text) 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            background: #79b8ff;
+        }
+        
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--text-secondary);
+        }
+        
+        /* Screenshot */
+        .screenshot {
+            margin: 60px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        
+        .screenshot img {
+            width: 100%;
+            display: block;
+        }
+        
+        .screenshot-placeholder {
+            background: var(--bg-card);
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Features */
+        .features {
+            padding: 80px 0;
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 60px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* Tech Stack */
+        .tech {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+        }
+        
+        .tech h2 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .tech-list {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+        
+        .tech-item {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        
+        .tech-item span {
+            display: block;
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">
+                    <div class="logo-icon">>_</div>
+                    JCH SSH Client
+                </a>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="privacy.html">Datenschutz</a>
+                    <a href="support.html">Support</a>
+                    <a href="https://github.com/jch-technologies/jch_ssh_client">GitHub</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>SSH, wie es sein sollte.</h1>
+                <p>Ein moderner, nativer SSH-Client für macOS. Mit echtem Terminal, Dateibrowser und Multi-Tab-Unterstützung.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
+                        Im App Store laden
+                    </a>
+                    <a href="https://github.com/jch-technologies/jch_ssh_client" class="btn btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        Quellcode
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <div class="container">
+            <div class="screenshot">
+                <div class="screenshot-placeholder">
+                    <!-- Hier Screenshot einfügen -->
+                    <code>Screenshot der App</code>
+                </div>
+            </div>
+        </div>
+        
+        <section class="features" id="features">
+            <div class="container">
+                <h2>Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🖥️</div>
+                        <h3>Echte Terminal-Emulation</h3>
+                        <p>SwiftTerm-basiertes Terminal mit voller ANSI-Unterstützung. nano, vim, htop – alles funktioniert.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📁</div>
+                        <h3>Integrierter Dateibrowser</h3>
+                        <p>Remote- und lokaler Dateibrowser nebeneinander. Dateien mit einem Klick öffnen oder übertragen.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔐</div>
+                        <h3>Alle Authentifizierungen</h3>
+                        <p>Passwort, SSH-Key, Passphrase, Keyboard-Interactive – alles wird unterstützt.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📑</div>
+                        <h3>Multi-Tab</h3>
+                        <p>Mehrere Verbindungen gleichzeitig in Tabs. Jeder Tab hat seinen eigenen Dateibrowser.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💾</div>
+                        <h3>Verbindungsprofile</h3>
+                        <p>Speichere deine Server-Konfigurationen und verbinde dich mit einem Klick.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Native macOS App</h3>
+                        <p>100% SwiftUI. Schnell, ressourcenschonend und perfekt in macOS integriert.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="tech">
+            <div class="container">
+                <h2>Technologie</h2>
+                <div class="tech-list">
+                    <div class="tech-item">
+                        <strong>SwiftUI</strong>
+                        <span>Native UI</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>SwiftTerm</strong>
+                        <span>Terminal</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Citadel</strong>
+                        <span>SSH Library</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>SwiftNIO</strong>
+                        <span>Networking</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="privacy.html">Datenschutz</a>
+                <a href="support.html">Support</a>
+                <a href="https://github.com/jch-technologies/jch_ssh_client">GitHub</a>
+            </div>
+            <p>© 2025 Joachim Christof Huben. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+</body>
+</html>
+
