@@ -8,6 +8,10 @@ Ein moderner, nativer SSH-Client für **macOS** und **iOS/iPadOS** – mit Termi
 
 - **Support**: [Support](support.md)
 - **Datenschutz**: [Datenschutz](datenschutz.md)
+- **English**:
+  - [English home](en/index.md)
+  - [Support (EN)](en/support.md)
+  - [Privacy (EN)](en/privacy.md)
 
 ### Features
 
@@ -21,5 +25,9 @@ Ein moderner, nativer SSH-Client für **macOS** und **iOS/iPadOS** – mit Termi
 
 - **Projektseite**: `https://jch-technologies.github.io/jch_ssh_client/`
 - **GitHub Issues (Support)**: `https://github.com/jch-technologies/jch_ssh_client/issues`
+
+
+
+
 
 
